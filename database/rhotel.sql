@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 04 avr. 2023 à 15:53
+-- Généré le : mar. 04 avr. 2023 à 16:08
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.0.25
 
@@ -68,7 +68,7 @@ CREATE TABLE `personne` (
 --
 
 INSERT INTO `personne` (`personneId`, `reservationId`, `p_name`, `daten`) VALUES
-(1, 8, 'hi', '2023-04-04');
+(2, 35, '', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -89,7 +89,7 @@ CREATE TABLE `reservation` (
 --
 
 INSERT INTO `reservation` (`reservationId`, `datearrive`, `datedepart`, `AdminId`, `ChambreId`) VALUES
-(8, '2023-04-04', '2023-04-09', 2, 2);
+(35, '2023-04-04', '2023-04-05', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -161,13 +161,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT pour la table `personne`
 --
 ALTER TABLE `personne`
-  MODIFY `personneId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `personneId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `reservationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `reservationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT pour la table `room`
@@ -183,7 +183,7 @@ ALTER TABLE `room`
 -- Contraintes pour la table `personne`
 --
 ALTER TABLE `personne`
-  ADD CONSTRAINT `reservationId` FOREIGN KEY (`reservationId`) REFERENCES `reservation` (`reservationId`);
+  ADD CONSTRAINT `reservationId` FOREIGN KEY (`reservationId`) REFERENCES `reservation` (`reservationId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `reservation`
