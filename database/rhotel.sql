@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 16 jan. 2023 à 02:25
--- Version du serveur : 10.4.22-MariaDB
--- Version de PHP : 7.4.27
+-- Généré le : mar. 04 avr. 2023 à 15:53
+-- Version du serveur : 10.4.27-MariaDB
+-- Version de PHP : 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,7 +36,7 @@ CREATE TABLE `admin` (
   `rolee` varchar(20) NOT NULL,
   `prenom` varchar(30) NOT NULL,
   `daten` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `admin`
@@ -45,7 +45,30 @@ CREATE TABLE `admin` (
 INSERT INTO `admin` (`AdminId`, `AdminName`, `AdminEmail`, `AdminPassword`, `imageadmin`, `rolee`, `prenom`, `daten`) VALUES
 (1, 'najoua', 'najouabelhaj7@gmail.com', 'najoua', '', 'admin', 'belhaj', '2001-10-23'),
 (2, 'ahmed', 'ahmed@gmail.com', 'ahmed', '', 'user', 'belhaj', '2007-10-25'),
-(3, 'nada', 'nada@gmail.com', 'nada', 'a', 'user', '', '0000-00-00');
+(3, 'nada', 'nada@gmail.com', 'nada', '', 'user', '', '0000-00-00'),
+(4, 'reda', 'reda@gmail.com', 'reda', '', 'user', '', '0000-00-00'),
+(5, 'ma', 'ma@gmail.com', 'mama', '', 'user', '', '0000-00-00'),
+(6, 'mn', 'mn@gmail.com', 'mnmn', '', 'user', '', '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `personne`
+--
+
+CREATE TABLE `personne` (
+  `personneId` int(11) NOT NULL,
+  `reservationId` int(11) NOT NULL,
+  `p_name` varchar(30) NOT NULL,
+  `daten` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `personne`
+--
+
+INSERT INTO `personne` (`personneId`, `reservationId`, `p_name`, `daten`) VALUES
+(1, 8, 'hi', '2023-04-04');
 
 -- --------------------------------------------------------
 
@@ -59,14 +82,14 @@ CREATE TABLE `reservation` (
   `datedepart` date NOT NULL,
   `AdminId` int(11) NOT NULL,
   `ChambreId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `reservation`
 --
 
 INSERT INTO `reservation` (`reservationId`, `datearrive`, `datedepart`, `AdminId`, `ChambreId`) VALUES
-(1, '2023-01-16', '2023-01-17', 2, 3);
+(8, '2023-04-04', '2023-04-09', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -81,16 +104,17 @@ CREATE TABLE `room` (
   `imageroom` varchar(20) NOT NULL,
   `typechambre` varchar(30) NOT NULL,
   `typedetype` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `room`
 --
 
 INSERT INTO `room` (`ChambreId`, `nombrepers`, `prix`, `imageroom`, `typechambre`, `typedetype`) VALUES
-(2, 1, 100, 'gallery-2.jpg', 'chambre', 'Lit single'),
-(3, 2, 150, 'gallery-2.jpg', 'chambre', 'double'),
-(4, 4, 317, 'gallery-2.jpg', 'suite', 'Junior');
+(2, 1, 100, 'gallery-2.jpg', 'single', ''),
+(3, 2, 150, 'gallery-2.jpg', 'double', ''),
+(4, 4, 317, 'gallery-2.jpg', 'suite', 'Junior'),
+(6, 3, 150, 'gallery-2.jpg', 'suite', 'junior');
 
 --
 -- Index pour les tables déchargées
@@ -101,6 +125,13 @@ INSERT INTO `room` (`ChambreId`, `nombrepers`, `prix`, `imageroom`, `typechambre
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`AdminId`);
+
+--
+-- Index pour la table `personne`
+--
+ALTER TABLE `personne`
+  ADD PRIMARY KEY (`personneId`),
+  ADD KEY `reservationId` (`reservationId`);
 
 --
 -- Index pour la table `reservation`
@@ -124,23 +155,35 @@ ALTER TABLE `room`
 -- AUTO_INCREMENT pour la table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `AdminId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `AdminId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT pour la table `personne`
+--
+ALTER TABLE `personne`
+  MODIFY `personneId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `reservationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `reservationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `room`
 --
 ALTER TABLE `room`
-  MODIFY `ChambreId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ChambreId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `personne`
+--
+ALTER TABLE `personne`
+  ADD CONSTRAINT `reservationId` FOREIGN KEY (`reservationId`) REFERENCES `reservation` (`reservationId`);
 
 --
 -- Contraintes pour la table `reservation`

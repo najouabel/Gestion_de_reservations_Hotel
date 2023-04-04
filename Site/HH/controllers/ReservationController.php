@@ -21,32 +21,44 @@ public function getAllReservations(){
 		}
 		return $reservations;
 	}
-
-	public function addReservation(){
-		if(isset($_POST["submit"])){
-        
-            $data = array(
-                "reservationId" =>  $_SESSION["reservationId"] ,
-				"datearrive" => $_POST["datearrive"],
-				"datedepart" => $_POST["datedepart"],
-				"UserId" => $_POST["UserId"],
-				"ChambreId" => $_POST["ChambreId"],
-
-			);
-			$result = Reservation::add($data);
-			
-		}
+	public function getAllpersonne(){
+		$pers = personne::getAll();
+		return $pers;
 	}
+	public function addReservation(){
+            $data = array(
+				"datearrive" => $_POST["checkin"],
+				"datedepart" => $_POST["checkout"],
+				"AdminId" =>$_SESSION['AdminId'],
+				"ChambreId" =>$_SESSION['ChambreId'],
+				
+			);
 
+			$data2 = array(
+				"num" =>$_POST["guestnum"],
+				"name" => $_POST["name"],
+				"age" => $_POST["age"],
+			);
+			if(Reservation::add($data)){
+				
+				if(personne::createperson($data2)){
+				    Session::set('success','Reservation ajoute');
+					Redirect::to('profil');
+				}else {
+					print("error");
+				}
+					Redirect::to('profil');
 
-	
+			}
+		
+	}
 	public function deleteReservation(){
 		if(isset($_POST['reservationId'])){
 			$data['reservationId'] = $_POST['reservationId'];
 			$result = Reservation::delete($data);
 			if($result === 'ok'){
 				Session::set('success','Reservation Supprimé');
-				Redirect::to('reservations');
+				Redirect::to('profil');
 			}else{
 				echo $result;
 			}

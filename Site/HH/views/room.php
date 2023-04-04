@@ -1,6 +1,6 @@
 <?php
 $data = new RoomController();
-$rooms = $data->getAllroom();
+$rooms = $data->getsearch();
 
 ?>
 
@@ -48,12 +48,11 @@ $rooms = $data->getAllroom();
                                     </tr>
                                 </tbody>
                             </table>
-                            <form method="POST" class="me-1" action="booking">
+                            <form method="POST" class="me-1" action="detail">
                         <input type="hidden" name="ChambreId" value="<?php echo $room['ChambreId'];?>">
                         <button> <a class="primary-btn">BOOK NOW</a></button>
                         
                     </form>
-                           
                         </div>
                     </div>
                 </div>
@@ -62,4 +61,4 @@ $rooms = $data->getAllroom();
             </div>
         </div>
     </section>
-    <!-- Rooms Section End -->
+<!-- Rooms Section End -->

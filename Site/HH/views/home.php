@@ -1,7 +1,7 @@
 <?php
 if(isset($_POST['search'])){
     $findroom= new RoomController();
-    $findroom->findroom();
+    $findroom->getsearch();
 }
 ?>
     
@@ -20,22 +20,39 @@ if(isset($_POST['search'])){
                 <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                     <div class="booking-form">
                         <h3>Booking Your Hotel</h3>
-                        <form action="room" method="$_POST">
+                        <form action="room" method="POST">
                             <div class="check-date">
                                 <label for="date-in">Check In:</label>
-                                <input type="date" class="date-input" id="date-in">
+                                <input type="date" name="checkin" class="date-input" id="date-in">
                                 
                             </div>
                             <div class="check-date">
                                 <l.carousel-itemabel for="date-out">Check Out:</label>
-                                <input type="date" class="date-input" id="date-out">
+                                <input type="date" name="checkout" class="date-input" id="date-out">
                                 
                             </div>
                             
-                            <div class="select-option">
-                                <label for="guest">Guests:</label>
-                                <input type="number" name="guest" min="1" max="6" step="1" value="1" style="width: 100%;">
+                            
+                            <div class="select-option" >
+                            <select class="form-select" onchange="changeselect(value)" name="rtype" aria-label="Default select example">
+                                <option selected>Choose a room</option>
+                                <option value="single">single</option>
+                                <option value="double">double </option>
+                                <option value="suite">suite</option>
+                                </select>
                             </div>
+                            <div class="select-option d-none" id="selectsuite">
+                            <select class="form-select" name="stype" aria-label="Default select example">
+                                <option></option>
+                                <option value="Standard">Standard</option>
+                                <option value="Junior">Junior</option>
+                                <option value="Presidential">Presidential</option>
+                                <option value="Penthouse" >Penthouse</option>
+                                <option value="Honeymoon">Honeymoon </option>
+                                <option value="Bridal">Bridal</option>
+                                </select>
+                            </div>
+
                          
                           
                             <button type="submit" name="search">Check Availability</button>
@@ -44,7 +61,7 @@ if(isset($_POST['search'])){
                 </div>
             </div>
         </div>
-        <div class="hero-slider owl-carousel">
+        <div class="hero-slider owl-carousel" >
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner" >
                     <div class="carousel-item active" >
@@ -63,7 +80,7 @@ if(isset($_POST['search'])){
     <!-- Hero Section End -->
 
     <!-- About Us Section Begin -->
-    <section class="aboutus-section spad">
+    <section class="aboutus-section spad" style="padding-top:50px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">

@@ -6,14 +6,14 @@ require_once './controllers/HomeController.php';
 $home = new HomeController();
 
 $admin = ['addro','updatero','deletero','logout','dashbord','login'];
-$user = ['addre','updatere','deletere','booking','logout','login','register','profil'];
+$user = ['addre','updatere','deletere','gests','detail','logout','login','register','profil'];
 $pages = ['home','roomsimple','room','roomsuite','contact'];
 
 
 
 if (isset($_GET['page']) && in_array($_GET['page'],$admin)) {
 
-  if (isset($_SESSION['loggedd']) && isset($_SESSION['loggedd']) === true ) {
+  if (isset($_SESSION['loggedd']) && $_SESSION['loggedd'] === true ) {
     if ($_GET['page'] === "login") {
       $home->index("dashbord");
     } else {
@@ -26,7 +26,7 @@ if (isset($_GET['page']) && in_array($_GET['page'],$admin)) {
   }
 
 }else if(isset($_GET['page']) && in_array($_GET['page'],$user)){
-  if (isset($_SESSION['logged']) && isset($_SESSION['logged']) === true) {
+  if (isset($_SESSION['logged']) && $_SESSION['logged'] === true) {
     if ($_GET['page'] === "login") {
       $home->index("profil");
 

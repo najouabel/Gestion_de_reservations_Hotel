@@ -14,26 +14,33 @@ class RoomController{
 		$room = Room::getAllsimple();
 		return $room;
 	}
+	
 
-public function findroom(){ 
-		if(isset($_POST['Search'])){
+public function getsearch(){ 
 			$data = array(
-				
-				'nombrepers' => $_POST['nombrepers'],
+				'rtype' => $_POST['rtype'],
+				'stype' => $_POST['stype'],
+				'checkin' => $_POST['checkin'],
+				'checkout' => $_POST['checkout'],
+
 			);
-		}
-		$room = Room::getBySearch($data);
+			$_SESSION['checkin']=$_POST['checkin'];
+			$_SESSION['checkout']=$_POST['checkout'];
+
+		// die(print_r($data));
+		$room = Room::getAllsearch($data);
 		return $room;
 	} 
 
 public function getOneRoom(){
-		if(isset($_POST['ChambreId'])){
 			$data = array(
 				'ChambreId' => $_POST['ChambreId']
 			);
 			$Room = Room::getRoom($data);
+			$_SESSION['ChambreId']=$_POST['ChambreId'];
+
 			return $Room;
-		}
+		
 	}
 
 public function updateRoom(){

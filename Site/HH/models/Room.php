@@ -12,7 +12,7 @@ class Room {
 	}
 	static public function getAllsimple(){
 		
-		$stmt = DB::connect()->prepare('SELECT * FROM room where typechambre="chambre"');
+		$stmt = DB::connect()->prepare('SELECT * FROM room where typechambre="double" or typechambre="single"');
 		$stmt->execute();
 		return $stmt->fetchAll();
 		// $stmt->close();
@@ -28,23 +28,33 @@ class Room {
 		$stmt = null;
 	}
 
-
+	static public function getAllsearch($data){
+		
+		$stmt = DB::connect()->prepare('SELECT room.* FROM room LEFT JOIN reservation ON room.ChambreId = reservation.ChambreId
+        WHERE (reservation.ChambreId IS NULL OR(reservation.datearrive not BETWEEN :checkin and :checkout)
+        and reservation.datedepart not BETWEEN :checkin and :checkout ) 
+        AND room.typechambre = :rtype AND room.typedetype = :stype ');
+		$stmt->bindParam(':checkin',$data['checkin']);
+		$stmt->bindParam(':rtype',$data['rtype']);
+		$stmt->bindParam(':stype',$data['stype']);
+		$stmt->bindParam(':checkout',$data['checkout']);
+		$stmt->execute();
+		return $stmt->fetchAll();
+		// $stmt = null;
+	}
 
 
 	static public function getBySearch($data){
 	$nombrepers = $data['nombrepers'];
 	
 	$query = 'SELECT * FROM room where  nombrepers >=:nombrepers ';
-
 			$stmt = DB::connect()->prepare($query);
 			$stmt->execute(array(":nombrepers" => $nombrepers
 		));
 			$room = $stmt->fetchAll();;
 			return $room;
-
-
-
 	}
+
 
 static public function update($data){
 		$stmt = DB::connect()->prepare('UPDATE room SET nombrepers=:nombrepers,prix=:prix,imageroom=:imageroom,typechambre=:typechambre,typedetype=:typedetype WHERE ChambreId=:ChambreId');
@@ -53,9 +63,7 @@ static public function update($data){
 		$stmt->bindParam(':prix',$data['prix']);
 		$stmt->bindParam(':imageroom',$data['imageroom']);
 		$stmt->bindParam(':typechambre',$data['typechambre']);
-		$stmt->bindParam(':typedetype',$data['typedetype']);
-
-			
+		$stmt->bindParam(':typedetype',$data['typedetype']);		
 		if($stmt->execute()){
 			return 'ok';
 		}else{

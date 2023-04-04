@@ -15,7 +15,7 @@ $admin=$dataa->getadmin();
           <div class="card-body text-center">
             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="imgprofil"
               class="rounded-circle img-fluid" style="width: 150px;">
-            <h5 class="my-3">profil name</h5>
+            <h5 class="my-3">profil </h5>
             <label class="btn btn-outline-primary" for="btnradio4"> 
                <a href="<?php echo BASE_URL;?>logout"class="nav-link px-3">
                   
@@ -29,22 +29,14 @@ $admin=$dataa->getadmin();
       <div class="col-lg-8">
         <div class="card mb-4">
           <div class="card-body">
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Name</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0"></p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
+          
+            <div class="row p-4 " >
               <div class="col-sm-3">
                 <p class="mb-0">Email</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">example@example.com</p>
-              </div>
+                <p class="text-muted mb-0"> 
+                <?php echo  $_SESSION['AdminEmail'];?>
             </div>
           </div>
         </div>
@@ -72,8 +64,9 @@ $admin=$dataa->getadmin();
                         <tr>
                           <th>datearrive</th>
                           <th>datedepart</th>
-                          <th>user email</th>
                           <th>type chambre</th>
+                          <th>update/delete</th>
+
                         </tr>
                       </thead>
          <?php foreach($reservations as $reservation):?>
@@ -82,15 +75,21 @@ $admin=$dataa->getadmin();
                         <tr>
                           <td><?php echo $reservation['datearrive'];?></td>
                           <td><?php echo $reservation['datedepart'];?></td>
-                          
-                          <td><?php foreach($admin as $admin):?>
-                          <?php if($reservation['AdminId']=== $admin['AdminId']) {
-                              echo $admin['AdminEmail'];}?>
-                              <?php endforeach; ?></td>
                           <td><?php foreach($rooms as $room):?>
-                            <?php if($reservation['ChambreId']=== $room['ChambreId']) {
+                          <?php if($reservation['ChambreId']=== $room['ChambreId']) {
                               echo $room['typechambre']." ".$room['typedetype'];}?>
                               <?php endforeach; ?></td>
+                              <td>
+                                <div class="d-flex">
+                            <form method="POST" class="me-1" action="updatere">
+                        <input type="hidden" name="reservationId" value="<?php echo $reservation['reservationId'];?>">
+                        <button class="btn btn-sm btn-warning"><i class="fa fa-eidt"> edit</i></button>
+                        
+                    </form>
+                    <form method="POST" class="me-1 " action="deletere">
+                        <input type="hidden" name="reservationId" value="<?php echo $reservation['reservationId'];?>">
+                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash">delete</i></button>
+                    </form></div></td>
                         </tr>
                       
                       

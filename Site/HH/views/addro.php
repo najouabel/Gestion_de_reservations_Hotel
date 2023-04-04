@@ -3,7 +3,6 @@ if(isset($_POST['submit'])){
     $newroom = new RoomController();
     $newroom->addRoom();
 }
-
 ?>
 <div class="booking">
 <div class="container mt-3">
@@ -24,9 +23,7 @@ if(isset($_POST['submit'])){
     <button type="submit" class="form-control btn btn-primary" name="submit">SUBMIT</button>
     
     </div>
-
    </form>
-    
    </div> 
 </div>
 

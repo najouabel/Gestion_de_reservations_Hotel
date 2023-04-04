@@ -63,7 +63,6 @@ $admin = $dataad->getAlladmin();
                         <tr>
                           <th>datearrive</th>
                           <th>datedepart</th>
-                          <th>user email</th>
                           <th>type chambre</th>
                         </tr>
                       </thead>
@@ -73,12 +72,7 @@ $admin = $dataad->getAlladmin();
                         <tr>
                           <td><?php echo $reservation['datearrive'];?></td>
                           <td><?php echo $reservation['datedepart'];?></td>
-                          <td>
-                          <?php foreach($admin as $admin):?>
-                            <?php if($reservation['AdminId']=== $admin['AdminId']) {
-                              echo $admin['AdminEmail'];}?>
-                              <?php endforeach; ?>
-                          </td>
+                          
                           <td><?php foreach($rooms as $room):?>
                             <?php if($reservation['ChambreId']=== $room['ChambreId']) {
                               echo $room['typechambre']." ".$room['typedetype'];}?>
@@ -130,6 +124,8 @@ $admin = $dataad->getAlladmin();
                           <td><?php echo $room['prix'];?></td>
                           <td><?php echo $room['imageroom'];?></td>
                           <td>
+                          <div class="d-flex">
+
                             <form method="POST" class="me-1" action="updatero">
                         <input type="hidden" name="ChambreId" value="<?php echo $room['ChambreId'];?>">
                         <button class="btn btn-sm btn-warning"><i class="fa fa-eidt"> edit</i></button>
@@ -138,7 +134,7 @@ $admin = $dataad->getAlladmin();
                     <form method="POST" class="me-1" action="deletero">
                         <input type="hidden" name="ChambreId" value="<?php echo $room['ChambreId'];?>">
                         <button class="btn btn-sm btn-danger"><i class="fa fa-trash">delete</i></button>
-                    </form></td>
+                    </form></div></td>
 
                         </tr>
                       

@@ -15,6 +15,8 @@ class AdminController{
                 if($result->AdminEmail === $_POST['AdminEmail'] && $result->AdminPassword === $_POST['AdminPassword'] ){
                     $_SESSION['loggedd'] = true;
                     $_SESSION['AdminEmail'] = $result->AdminEmail;
+                    $_SESSION['AdminId'] = $result->AdminId;
+
                     Redirect::to('dashbord');
                 } else {
 
@@ -25,6 +27,8 @@ class AdminController{
                 if($result->AdminEmail === $_POST['AdminEmail'] && $result->AdminPassword === $_POST['AdminPassword'] ){
                     $_SESSION['logged'] = true;
                     $_SESSION['AdminEmail'] = $result->AdminEmail;
+                    $_SESSION['AdminId'] = $result->AdminId;
+
                     Redirect::to('profil');
                 } else {
                     Session::set('error','email or password not valid');
@@ -61,43 +65,6 @@ class AdminController{
 		}
 	}
 
-    public function registerperson(){
-		if(isset($_POST['submit'])){
-			
-		
-			$data = array(
-				'AdminName' => $_POST['AdminName'],
-				'prenom' => $_POST['prenom'],
-				'daten' => $_POST['daten'],
-			);
-			$result = Admin::createperson($data);
-			if($result === 'ok'){
-				Session::set('success','Compte crée');
-				Redirect::to('login');
-			}else{
-				echo $result;
-			}
-		}
-	}
-
-    public function updateperson(){
-		if(isset($_POST['submit'])){
-			$data = array(
-				'AdminId' => $_SESSION['AdminId'] ,
-				'AdminName' => $_POST['AdminName'],
-				'prenom' => $_POST['prenom'],
-				'daten' => $_POST['daten'],
-				
-			);
-			$result = Admin::updateperson($data);
-			if($result === 'ok'){
-				Session::set('success','compte Modifié');
-				Redirect::to('home');
-			}else{
-				echo $result;
-			}
-		}
-	}
 	public function getadmin(){
 		if(isset($_POST['submit'])){
 			$data = array(
@@ -113,7 +80,7 @@ class AdminController{
 			}
 		}
 	}
-
+    
    
 
 }

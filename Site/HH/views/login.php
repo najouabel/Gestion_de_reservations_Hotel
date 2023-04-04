@@ -3,6 +3,7 @@ if(isset($_POST['submit'])){
     $loginAdmin = new AdminController();
     $loginAdmin->auth();
 }
+
 ?>
 	
     <div class="login-page">

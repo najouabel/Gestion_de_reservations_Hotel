@@ -126,6 +126,78 @@ ul, ol {
 	background: #dfa974;
 	content: "";
 }
+/*-----------------------
+  Room Details Section
+-------------------------*/
+
+.room-details-section {
+	padding-top: 0;
+	padding-bottom: 80px;
+}
+.room-details-item {
+	margin-bottom: 50px;
+}
+.room-details-item img {
+	margin-bottom: 40px;
+}
+.room-details-item .rd-text .rd-title {
+	overflow: hidden;
+	margin-bottom: 8px;
+}
+.room-details-item .rd-text .rd-title h3 {
+	color: #19191a;
+	float: left;
+}
+.room-details-item .rd-text .rd-title .rdt-right {
+	float: right;
+	text-align: right;
+}
+.room-details-item .rd-text .rd-title .rdt-right .rating {
+	display: inline-block;
+	margin-right: 25px;
+	margin-bottom: 10px;
+}
+.room-details-item .rd-text .rd-title .rdt-right .rating i {
+	color: #f5b917;
+}
+.room-details-item .rd-text .rd-title .rdt-right a {
+	display: inline-block;
+	color: #ffffff;
+	font-size: 13px;
+	text-transform: uppercase;
+	font-weight: 700;
+	background: #dfa974;
+	padding: 14px 28px 13px;
+}
+.room-details-item .rd-text h2 {
+	color: #dfa974;
+	font-weight: 700;
+	margin-bottom: 25px;
+}
+.room-details-item .rd-text h2 span {
+	font-family: "Cabin", sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: #19191a;
+}
+.room-details-item .rd-text table {
+	margin-bottom: 32px;
+}
+.room-details-item .rd-text table tbody tr td {
+	font-size: 16px;
+	color: #19191a;
+	line-height: 36px;
+}
+.room-details-item .rd-text table tbody tr td.r-o {
+	width: 120px;
+	color: #707079;
+}
+.room-details-item .rd-text p {
+	color: #707079;
+}
+.room-details-item .rd-text p.f-para {
+	margin-bottom: 22px;
+}
 /*---------------------
   login
 -----------------------*/
@@ -284,7 +356,7 @@ ul, ol {
 }
 .booking-form h3 {
 	color: #19191a;
-	margin-bottom: 36px;
+	margin-bottom: 17px;
 }
 .booking-form form .check-date {
 	position: relative;
@@ -452,6 +524,9 @@ ul, ol {
 	-webkit-transition: all 0.3s;
 	-o-transition: all 0.3s;
 	transition: all 0.3s;
+}
+.row{
+	margin-top: -4%;
 }
 /*------------------------
   Home Page Room Section 

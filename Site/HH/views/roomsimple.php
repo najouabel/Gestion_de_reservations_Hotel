@@ -48,11 +48,7 @@ $rooms = $data->getAllroomsimple();
                                     </tr>
                                 </tbody>
                             </table>
-                            <form method="POST" class="me-1" action="booking">
-                        <input type="hidden" name="ChambreId" value="<?php echo $room['ChambreId'];?>">
-                        <button> <a class="primary-btn">BOOK NOW</a></button>
-                        
-                    </form>
+                         
                            
                         </div>
                     </div>

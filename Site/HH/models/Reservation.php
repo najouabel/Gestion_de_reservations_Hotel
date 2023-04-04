@@ -10,6 +10,7 @@ static public function getAll(){
 		$stmt = null;
 	}
 
+
 	static public function add($data){
 		$stmt = DB::connect()->prepare('INSERT INTO Reservation (AdminId,ChambreId,datearrive,datedepart)
 			VALUES (:AdminId,:ChambreId,:datearrive,:datedepart)');
@@ -17,11 +18,8 @@ static public function getAll(){
 		$stmt->bindParam(':ChambreId',$data['ChambreId']);
 		$stmt->bindParam(':datearrive',$data['datearrive']);
 		$stmt->bindParam(':datedepart',$data['datedepart']);
-
-	
-		$stmt->execute();
+		return $stmt->execute();
 	}
-
 static public function getroomBynoreservation($data){
 	$ChambreId = $data['ChambreId'];
 	$query = 'SELECT * FROM reservation,room WHERE reservation.ChambreId=:ChambreId AND reservation.ChambreId=room.ChambreId';
